@@ -232,7 +232,7 @@ elif mode == "Admin - Manage Products":
                         (pname, cost, sell, stock))
             conn.commit()
             st.success("Product added successfully.")
-            st.experimental_rerun()
+            st.rerun()
 
     st.markdown("### 🔄 Add Stock to Existing Product")
     with st.form("add_stock"):
@@ -264,7 +264,7 @@ elif mode == "Admin - Add Order":
             qty = st.number_input("Quantity", min_value=1, value=1)
             if st.form_submit_button("Add Item"):
                 st.session_state['order_items_tmp'].append({'product_id': product_choices[psel], 'qty': qty})
-                st.experimental_rerun()
+                st.rerun()
 
         st.subheader("Current Items")
         lines = []
@@ -295,6 +295,6 @@ elif mode == "Admin - Add Order":
 
                 st.success(f"Order saved (ID {oid}). Total ₹{total_amt:.2f}")
                 st.session_state['order_items_tmp'] = []
-                st.experimental_rerun()
+                st.rerun()
         else:
             st.info("Add products to order first.")
