@@ -1,10 +1,4 @@
-"""
-Enhanced Streamlit + SQLite Dashboard
-for Daily-Needs Shop Business Analytics
 
-Run:
-    streamlit run streamlit_app.py
-"""
 
 import sqlite3
 from sqlite3 import Connection
@@ -171,7 +165,7 @@ conn = get_conn()
 init_db(conn)
 seed_dummy_data(conn)
 
-mode = st.sidebar.selectbox("Select Mode", ["Dashboard", "Admin - Manage Products", "Admin - Add Order"])
+mode = st.sidebar.selectbox("Select Mode", ["Dashboard", "Admin - Manage Products", "Admin - Add Order","Power BI Dashboard"])
 
 products_df, orders_df, order_items_df = load_tables(conn)
 
@@ -207,6 +201,16 @@ if mode == "Dashboard":
         else:
             st.dataframe(low_df)
 
+elif mode == "Power BI Dashboard":
+    st.title("📊 Power BI Business Analytics Dashboard")
+
+    st.markdown("""
+        <iframe title="ba_final" width="100%" height="600"
+        src="https://app.powerbi.com/reportEmbed?reportId=efd8456f-36fa-4e91-ae0c-be2855468d00&autoAuth=true&ctid=34bd8bed-2ac1-41ae-9f08-4e0a3f11706c"
+        frameborder="0" allowFullScreen="true"></iframe>
+    """, unsafe_allow_html=True)
+
+    st.info("This Power BI dashboard is connected to the same SQL data used in the Streamlit app.")
 # --------------------------
 # Admin - Manage Products
 # --------------------------
